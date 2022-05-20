@@ -90,13 +90,14 @@ export default {
   width: 20vw;
   background: #272936;
   height: 100vh;
+  padding-top: 27px;
 }
 
 .menu-sidebar-link {
-  display: block;
+  display: flex;
+  align-items: center;
   text-align: left;
-  padding-left: 3vw;
-  padding-top: 1vh;
+  padding-left: 60px;
   font-weight: 500;
   font-size: 19px;
   line-height: 22px;
@@ -106,13 +107,12 @@ export default {
 .menu-sidebar-link-container {
   flex-direction: column;
   justify-content: space-between;
-  height: 60vh;
 }
 
 .menu-sidebar-link-block {
   flex: 1;
   width: 100%;
-  height: 5vh;
+  height: 52px;
   font-size: 19px;
   color: #7C7E8F;
   display: flex;
@@ -123,21 +123,21 @@ export default {
 .menu-sidebar-title {
   flex: 1;
   width: 100%;
-  height: 10vh;
   font-size: 25px;
   color: #7C7E8F;
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-left: 1vw;
+  padding-left: 30px;
+  margin-bottom: 40px;
 }
 
 
 .menu-sidebar-link-block-active {
   flex: 1;
   width: 100%;
-  height: 5vh;
+  height: 52px;
   font-size: 19px;
   background: rgba(184, 186, 203, 0.6);
   display: flex;

@@ -38,6 +38,7 @@ export default {
     display: flex;
     align-items: center;
     padding-top: 18px;
+    padding-bottom: 18px;
     padding-left: 42px;
 
     .breadcrumbs-first-divider {

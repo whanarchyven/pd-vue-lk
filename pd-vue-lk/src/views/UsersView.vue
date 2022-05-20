@@ -1,15 +1,7 @@
 <template>
   <div class="users">
     <div class="d-flex flex-row justify-space-between">
-      <bread-crumbs-line page="users" />
-      <div class="breadcrumbs">
-        <v-btn
-          color="primary"
-          elevation="2"
-          small
-          @click="newBookDialog = true"
-        >Добавить</v-btn>
-      </div>
+      <bread-crumbs-line page="users"/>
     </div>
     <data-table
       :loading="loading"
