@@ -2,7 +2,7 @@
   <!--  <div class="content-loader" v-if="loading">-->
   <!--    <img src="@/assets/images/horizontal_loader.gif" alt="" />-->
   <!--  </div>-->
-  <div>
+  <div data-app>
     <bread-crumbs-line page="users" :custom-end="customBreadCrumb" />
     <div class="content">
       <div class="user-row">
@@ -11,13 +11,56 @@
         </div>
         <div class="user-info">
           <h1 class="user-info-name">{{ user.name }}</h1>
-          <h3 class="user-info-email">{{ user.email }}</h3>
-          <div class="user-info-books"></div>
+          <span class="user-info-email">{{ user.email }}</span>
+          <div class="user-info-books">
+            <div class="user-info-books-column">
+              <div class="user-info-books-column-top">
+                <h3 class="user-info-books-column-title">Прочитанные</h3>
+                <span class="user-info-books-column-count">
+                  Все({{ books.readied.length }})
+                </span>
+              </div>
+              <ul class="user-info-books-column-list">
+                <li v-for="(item, index) in books.readied" v-bind:key="index">
+                  {{ index + 1 }}. {{ item }}
+                </li>
+              </ul>
+            </div>
+            <div class="user-info-books-column">
+              <div class="user-info-books-column-top">
+                <h3 class="user-info-books-column-title">Желаемые книги</h3>
+                <span class="user-info-books-column-count">
+                  Все({{ books.wished.length }})
+                </span>
+              </div>
+              <ul class="user-info-books-column-list">
+                <li v-for="(item, index) in books.wished" v-bind:key="index">
+                  {{ index + 1 }}. {{ item }}
+                </li>
+              </ul>
+            </div>
+            <div class="user-info-books-column">
+              <div class="user-info-books-column-top">
+                <h3 class="user-info-books-column-title">Рекомендации</h3>
+                <span class="user-info-books-column-count">
+                  Все({{ books.recommended.length }})
+                </span>
+              </div>
+              <ul class="user-info-books-column-list">
+                <li
+                  v-for="(item, index) in books.recommended"
+                  v-bind:key="index"
+                >
+                  {{ index + 1 }}. {{ item }}
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="book-actions">
-          <div class="book-actions-buttons">
+        <div class="user-actions">
+          <div class="user-actions-buttons">
             <v-btn
-              class="book-action-button"
+              class="user-action-button"
               elevation="2"
               large
               plain
@@ -26,7 +69,7 @@
               Изменить
             </v-btn>
             <v-btn
-              class="book-action-button button-danger"
+              class="user-action-button button-danger"
               elevation="2"
               large
               plain
@@ -34,6 +77,20 @@
             >
               Удалить
             </v-btn>
+          </div>
+        </div>
+      </div>
+      <div class="user-row">
+        <div class="user-favourite-wrap">
+          <h2 class="user-row-title">Предпочтения жанров</h2>
+          <div class="user-favourite">
+            <div
+              v-for="(item, index) in favourite"
+              v-bind:key="index"
+              class="user-favourite-label"
+            >
+              {{ item }}
+            </div>
           </div>
         </div>
       </div>
@@ -72,6 +129,30 @@ export default {
       name: "Алена Петрова",
       email: "petrova3674@mail.ru",
     },
+    books: {
+      readied: [
+        "Война и мир",
+        "Горе от ума",
+        "Убить пересмешника",
+        "Двенадцать стульев",
+        "Искра жизни",
+      ],
+      wished: [
+        "Отверженные",
+        "На западном фронте...",
+        "Мартин Иден",
+        "Три товарища",
+        "Время жить и время...",
+      ],
+      recommended: [
+        "Отверженные",
+        "На западном фронте...",
+        "Мартин Иден",
+        "Три товарища",
+        "Время жить и время...",
+      ],
+    },
+    favourite: ["классическая проза", "русская классика"],
     description: null,
     editedUser: null,
     customBreadCrumb: null,
@@ -165,11 +246,12 @@ export default {
     // },
     //
     async deleteItem() {
-      if (await this.deleteUser(this.user.id)) {
-        this.$router.push({ name: "users" });
-      } else {
-        this.deleteDialog = false;
-      }
+      this.$router.push({ name: "users" });
+      // if (await this.deleteUser(this.user.id)) {
+      //   this.$router.push({ name: "users" });
+      // } else {
+      //   this.deleteDialog = false;
+      // }
     },
     //
     // cancelEdit() {
@@ -200,12 +282,123 @@ export default {
 <style scoped lang="scss">
 .content {
   width: 100%;
-  padding: 12px;
+  padding-left: 12px;
+  padding-top: 12px;
+  padding-right: 44px;
   border-radius: 6px;
+  margin-left: 15px;
+  margin-right: 26px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 21px;
+}
+
+.user-info-name {
+  font-weight: 400;
+  font-size: 33px;
+  line-height: 39px;
+  color: #f4f4f4;
+  margin-top: 11px;
+  margin-bottom: 10px;
+}
+
+.user-info-email {
+  text-align: left;
+  margin-bottom: 44px;
+}
+
+.user-actions {
+  margin-left: auto;
+}
+
+.user-actions-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .user-row {
   display: flex;
   align-items: flex-start;
+}
+
+.user-info-books {
+  display: flex;
+}
+
+.user-info-books-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 72px;
+}
+
+.user-info-books-column-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 19px;
+}
+.user-info-books-column-title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 26px;
+  color: #f4f4f4;
+  margin-right: 14px;
+}
+
+.user-info-books-column-count {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.user-info-books-column-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  list-style: none;
+  li {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    color: #f4f4f4;
+  }
+}
+
+.user-favourite-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 28px;
+}
+
+.user-row-title {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 26px;
+  color: #f4f4f4;
+  margin-bottom: 10px;
+}
+
+.user-favourite {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.user-favourite-label {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #376482;
+  padding: 6px;
+  background: #b7e2f4;
+  border-radius: 4px;
+  margin-bottom: 10px;
 }
 </style>

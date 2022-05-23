@@ -12,10 +12,9 @@
   font-family: Roboto, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   display: flex;
-  background-color: #1B1D2C;
+  background-color: #1b1d2c;
 }
 
 nav {
@@ -35,6 +34,6 @@ nav {
 <script>
 import MenuSideBar from "@/components/MenuSideBar";
 export default {
-  components: {MenuSideBar}
-}
+  components: { MenuSideBar },
+};
 </script>
