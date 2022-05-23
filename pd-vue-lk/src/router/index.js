@@ -9,6 +9,7 @@ import GenresView from "@/views/GenresView";
 import SeriesView from "@/views/SeriesView";
 import StatisticView from "@/views/StatisticView";
 import UsersView from "@/views/UsersView";
+import UserView from "@/views/UserView";
 
 Vue.use(VueRouter);
 
@@ -59,6 +60,11 @@ const routes = [
     path: "/users",
     name: "users",
     component: UsersView,
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: UserView,
   },
   {
     path: "/about",

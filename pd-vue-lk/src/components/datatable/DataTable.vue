@@ -59,7 +59,7 @@
           <td v-for="column in columns" class="text-start">
             <router-link
               class="data-table-link"
-              :to="{ name: 'Book', params: { id: item.id } }"
+              :to="{ name: 'user', params: { id: item.id } }"
             >
               <span
                 v-if="column.class && column.class.dynamic"
@@ -186,3 +186,10 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.data-table-link {
+  color: white;
+  text-decoration: none;
+}
+</style>
