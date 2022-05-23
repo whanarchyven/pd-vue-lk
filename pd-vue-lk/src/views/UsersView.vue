@@ -1,14 +1,13 @@
 <template>
-  <div class="users">
+  <div class="users" data-app>
     <div class="d-flex flex-row justify-space-between">
-      <bread-crumbs-line page="users"/>
+      <bread-crumbs-line page="users" />
     </div>
     <data-table
       :loading="loading"
       :columns="columns"
       :pagination="pagination"
       :items="books"
-
       @columnFilterChanged=""
       @onFilter=""
       @onRowClick=""
@@ -17,12 +16,11 @@
       @orderDir=""
     ></data-table>
 
-<!--    <book-dialog v-if="!loading" :dialog="newBookDialog" :genres="genres" @closed="newBookDialog = false"></book-dialog>-->
+    <!--    <book-dialog v-if="!loading" :dialog="newBookDialog" :genres="genres" @closed="newBookDialog = false"></book-dialog>-->
   </div>
 </template>
 
 <script>
-
 import BreadCrumbsLine from "@/components/BreadCrumbsLine";
 import DataTable from "@/components/datatable/DataTable";
 import { mapActions } from "vuex";
@@ -41,13 +39,13 @@ export default {
     },
     columns: [
       {
-        data: 'ID',
-        name: 'id',
+        data: "ID",
+        name: "id",
         orderable: true,
         searchable: true,
         filter: {
           placeholder: "ID",
-          type: 'text',
+          type: "text",
         },
         search: {
           value: "",
@@ -55,13 +53,13 @@ export default {
         },
       },
       {
-        data: 'Название',
-        name: 'title',
+        data: "Имя пользователя",
+        name: "name",
         orderable: true,
         searchable: true,
         filter: {
-          placeholder: "По названию",
-          type: 'text',
+          placeholder: "Имя пользователя",
+          type: "text",
         },
         search: {
           value: "",
@@ -69,13 +67,13 @@ export default {
         },
       },
       {
-        data: 'Автор',
-        name: 'author',
+        data: "Почта",
+        name: "mail",
         orderable: true,
         searchable: true,
         filter: {
-          placeholder: "По автору",
-          type: 'text',
+          placeholder: "Почта",
+          type: "text",
         },
         search: {
           value: "",
@@ -83,12 +81,12 @@ export default {
         },
       },
       {
-        data: 'Статус',
-        name: 'status',
+        data: "Прочитанные",
+        name: "readied",
         orderable: true,
         searchable: true,
         class: {
-          name: 'column-badge column-value-',
+          name: "column-badge column-value-",
           dynamic: true,
         },
         naming: {
@@ -96,14 +94,14 @@ export default {
           moderation: "На модерации",
         },
         filter: {
-          placeholder: "По статусу",
-          type: 'select',
-          options: ['all', 'moderation', 'active'],
+          placeholder: "По кол-ву",
+          type: "select",
+          options: ["all", "moderation", "active"],
           optionsText: {
             all: "Все",
             moderation: "На модерации",
             active: "Активна",
-          }
+          },
         },
         search: {
           value: "",
@@ -111,41 +109,27 @@ export default {
         },
       },
       {
-        data: 'Словник',
-        name: 'frequency',
+        data: "Дата регистрации",
+        name: "registration-date",
         orderable: true,
         searchable: true,
         class: {
-          name: 'column-badge column-value-frequency-',
+          name: "column-badge column-value-frequency-",
           dynamic: true,
         },
         naming: {
           exists: "Составлен",
-          'not-exists': "Не составлен",
+          "not-exists": "Не составлен",
         },
         filter: {
-          placeholder: "По словнику",
-          type: 'select',
-          options: ['all', 'exists', 'not-exists'],
+          placeholder: "Новые",
+          type: "select",
+          options: ["all", "exists", "not-exists"],
           optionsText: {
             all: "Все",
             exists: "Составлен",
-            'not-exists': "Не составлен",
-          }
-        },
-        search: {
-          value: "",
-          regex: "",
-        },
-      },
-      {
-        data: 'Добавлена',
-        name: 'created_at',
-        orderable: true,
-        searchable: true,
-        filter: {
-          placeholder: "По дате добавления",
-          type: 'date',
+            "not-exists": "Не составлен",
+          },
         },
         search: {
           value: "",
@@ -156,8 +140,8 @@ export default {
     orderColumn: null,
     orderDesc: false,
     bookStatuses: [
-      { name: "На модерации", code: 'moderation' },
-      { name: "Активна", code: 'active' },
+      { name: "На модерации", code: "moderation" },
+      { name: "Активна", code: "active" },
     ],
     pagination: {
       per_page: null,
@@ -229,9 +213,9 @@ export default {
   //     this.books = books.data;
   //   },
   //
-  //   // onFilter: debounce(async function () {
-  //   //   await this.loadData();
-  //   // }, 1000),
+  //   onFilter: debounce(async function () {
+  //     await this.loadData();
+  //   }, 1000),
   //
   //   columnFilterUpdate(key, value) {
   //     const columns = this.columns;
@@ -260,9 +244,8 @@ export default {
   //     this.orderDesc = dir;
   //   }
   // },
-}
+};
 </script>
-
 
 <style scoped lang="scss">
 .users {
