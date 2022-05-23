@@ -8,12 +8,12 @@
       :columns="columns"
       :pagination="pagination"
       :items="users"
-      @columnFilterChanged=""
+      @columnFilterChanged="columnFilterUpdate"
       @onFilter=""
       @onRowClick=""
       @onPage=""
-      @orderColumn=""
-      @orderDir=""
+      @orderColumn="setOrderColumn"
+      @orderDir="setOrderDirection"
     ></data-table>
 
     <!--    <book-dialog v-if="!loading" :dialog="newBookDialog" @closed="newBookDialog = false"></book-dialog>-->
@@ -37,6 +37,13 @@ export default {
         name: "test",
         mail: "test@mail.ru",
         readied: 12,
+        "registration-date": new Date(),
+      },
+      {
+        id: 2,
+        name: "test2",
+        mail: "test2@mail.ru",
+        readied: 4,
         "registration-date": new Date(),
       },
     ],
@@ -93,6 +100,10 @@ export default {
           name: "column-badge column-value-",
           dynamic: true,
         },
+        // naming: {
+        //   "by-count": "По кол-ву",
+        //   moderation: "На модерации",
+        // },
         filter: {
           placeholder: "По кол-ву",
           type: "select",
@@ -116,10 +127,14 @@ export default {
           name: "column-badge column-value-frequency-",
           dynamic: true,
         },
+        // naming: {
+        //   new: "Новые",
+        //   old: "Старые",
+        // },
         filter: {
           placeholder: "Новые",
           type: "select",
-          options: ["new", "exists"],
+          options: ["new", "old"],
           optionsText: {
             new: "Новые",
             old: "Старые",
@@ -160,70 +175,72 @@ export default {
   //     }
   //   },
   // },
-  // methods: {
-  //   ...mapActions(['loadBooks']),
-  //
-  //   async initData() {
-  //     this.loading = true;
-  //     const page = this.$route.query.page ?? 1;
-  //
-  //     await Promise.all([
-  //       this.loadBooks({page: page, order: [this.order], columns: this.columns}),
-  //     ]).then(([
-  //                books,
-  //              ]) => {
-  //       this.setTable(books);
-  //     })
-  //
-  //     this.loading = false;
-  //   },
-  //
-  //   async loadData(page = 1) {
-  //     this.loading = true;
-  //
-  //     const books = await this.loadBooks({
-  //       page: page,
-  //       order: [{
-  //         column: this.orderColumn,
-  //         dir: this.orderDesc ? "desc" : "asc",
-  //       }],
-  //       columns: this.columns,
-  //     });
-  //     this.setTable(books);
-  //
-  //     this.loading = false;
-  //   },
-  //
-  //   setTable(books) {
-  //     this.pagination = books.pagination;
-  //     this.books = books.data;
-  //   },
-  //
-  //   onFilter: debounce(async function () {
-  //     await this.loadData();
-  //   }, 1000),
-  //
-  //   columnFilterUpdate(key, value) {
-  //     const columns = this.columns;
-  //     columns[key].search.value = value;
-  //     this.columns = columns;
-  //   },
-  //
-  onRowClick(item) {
-    this.$router.push({ name: "User", params: { id: item.id } });
-  },
+  methods: {
+    //   ...mapActions(['loadBooks']),
+    //
+    //   async initData() {
+    //     this.loading = true;
+    //     const page = this.$route.query.page ?? 1;
+    //
+    //     await Promise.all([
+    //       this.loadBooks({page: page, order: [this.order], columns: this.columns}),
+    //     ]).then(([
+    //                books,
+    //              ]) => {
+    //       this.setTable(books);
+    //     })
+    //
+    //     this.loading = false;
+    //   },
+    //
+    //   async loadData(page = 1) {
+    //     this.loading = true;
+    //
+    //     const books = await this.loadBooks({
+    //       page: page,
+    //       order: [{
+    //         column: this.orderColumn,
+    //         dir: this.orderDesc ? "desc" : "asc",
+    //       }],
+    //       columns: this.columns,
+    //     });
+    //     this.setTable(books);
+    //
+    //     this.loading = false;
+    //   },
+    //
+    //   setTable(books) {
+    //     this.pagination = books.pagination;
+    //     this.books = books.data;
+    //   },
+    //
+    //   onFilter: debounce(async function () {
+    //     await this.loadData();
+    //   }, 1000),
+    //
+    columnFilterUpdate(key, value) {
+      const columns = this.columns;
+      columns[key].search.value = value;
+      this.columns = columns;
+    },
+    //
+    // onRowClick(item) {
+    //   console.log("test");
+    //   this.$router.push({ name: "user", params: { id: item.id } });
+    // },
 
-  async onPage(page) {
-    history.pushState({}, null, this.$route.path + "?page=" + page);
-    // await this.loadData(page);
-  },
+    async onPage(page) {
+      history.pushState({}, null, this.$route.path + "?page=" + page);
+      // await this.loadData(page);
+    },
 
-  setOrderColumn(column) {
-    this.orderColumn = column;
-  },
+    setOrderColumn(column) {
+      this.orderColumn = column;
+    },
 
-  setOrderDirection(dir) {
-    this.orderDesc = dir;
+    setOrderDirection(dir) {
+      this.orderDesc = dir;
+    },
   },
 };
 </script>

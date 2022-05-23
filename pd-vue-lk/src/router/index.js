@@ -61,6 +61,11 @@ const routes = [
     component: UsersView,
   },
   {
+    path: "/user/",
+    name: "user",
+    component: UsersView,
+  },
+  {
     path: "/about",
     name: "about",
     // route level code-splitting
