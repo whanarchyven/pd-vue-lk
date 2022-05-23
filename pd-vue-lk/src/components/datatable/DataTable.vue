@@ -59,7 +59,7 @@
           <td v-for="column in columns" class="text-start">
             <router-link
               class="data-table-link"
-              :to="{ name: 'Book', params: { id: item.id } }"
+              :to="{ name: 'User', params: { id: item.id } }"
             >
               <span
                 v-if="column.class && column.class.dynamic"

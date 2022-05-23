@@ -7,7 +7,7 @@
       :loading="loading"
       :columns="columns"
       :pagination="pagination"
-      :items="books"
+      :items="users"
       @columnFilterChanged=""
       @onFilter=""
       @onRowClick=""
@@ -16,7 +16,7 @@
       @orderDir=""
     ></data-table>
 
-    <!--    <book-dialog v-if="!loading" :dialog="newBookDialog" :genres="genres" @closed="newBookDialog = false"></book-dialog>-->
+    <!--    <book-dialog v-if="!loading" :dialog="newBookDialog" @closed="newBookDialog = false"></book-dialog>-->
   </div>
 </template>
 
@@ -30,13 +30,17 @@ import { mapActions } from "vuex";
 export default {
   components: { BreadCrumbsLine, DataTable },
   data: () => ({
-    loading: true,
-    books: null,
+    loading: false,
+    users: [
+      {
+        id: 1,
+        name: "test",
+        mail: "test@mail.ru",
+        readied: 12,
+        "registration-date": new Date(),
+      },
+    ],
     newBookDialog: false,
-    genres: {
-      all: [],
-      select: [],
-    },
     columns: [
       {
         data: "ID",
@@ -89,18 +93,13 @@ export default {
           name: "column-badge column-value-",
           dynamic: true,
         },
-        naming: {
-          active: "Активна",
-          moderation: "На модерации",
-        },
         filter: {
           placeholder: "По кол-ву",
           type: "select",
-          options: ["all", "moderation", "active"],
+          options: ["by-count", "moderation"],
           optionsText: {
-            all: "Все",
+            "by-count": "По кол-ву",
             moderation: "На модерации",
-            active: "Активна",
           },
         },
         search: {
@@ -117,18 +116,13 @@ export default {
           name: "column-badge column-value-frequency-",
           dynamic: true,
         },
-        naming: {
-          exists: "Составлен",
-          "not-exists": "Не составлен",
-        },
         filter: {
           placeholder: "Новые",
           type: "select",
-          options: ["all", "exists", "not-exists"],
+          options: ["new", "exists"],
           optionsText: {
-            all: "Все",
-            exists: "Составлен",
-            "not-exists": "Не составлен",
+            new: "Новые",
+            old: "Старые",
           },
         },
         search: {
@@ -139,18 +133,14 @@ export default {
     ],
     orderColumn: null,
     orderDesc: false,
-    bookStatuses: [
-      { name: "На модерации", code: "moderation" },
-      { name: "Активна", code: "active" },
-    ],
     pagination: {
-      per_page: null,
-      total: null,
-      current_page: null,
-      first_page: null,
-      last_page: null,
-      prev_page: null,
-      next_page: null,
+      per_page: 1,
+      total: 1,
+      current_page: 1,
+      first_page: 1,
+      last_page: 1,
+      prev_page: 1,
+      next_page: 1,
     },
   }),
   // mounted() {
@@ -171,7 +161,7 @@ export default {
   //   },
   // },
   // methods: {
-  //   ...mapActions(['loadBooks', 'loadGenres']),
+  //   ...mapActions(['loadBooks']),
   //
   //   async initData() {
   //     this.loading = true;
@@ -179,14 +169,10 @@ export default {
   //
   //     await Promise.all([
   //       this.loadBooks({page: page, order: [this.order], columns: this.columns}),
-  //       this.loadGenres(),
   //     ]).then(([
   //                books,
-  //                genres,
   //              ]) => {
   //       this.setTable(books);
-  //       this.genres.all = genres.data;
-  //       this.genres.select = genres.data;
   //     })
   //
   //     this.loading = false;
@@ -223,27 +209,22 @@ export default {
   //     this.columns = columns;
   //   },
   //
-  //   onRowClick (item) {
-  //     this.$router.push({ name: "Book", params: { id: item.id } });
-  //   },
-  //
-  //   async onPage(page) {
-  //     history.pushState(
-  //       {},
-  //       null,
-  //       this.$route.path + "?page=" + page
-  //     );
-  //     await this.loadData(page);
-  //   },
-  //
-  //   setOrderColumn (column) {
-  //     this.orderColumn = column;
-  //   },
-  //
-  //   setOrderDirection (dir) {
-  //     this.orderDesc = dir;
-  //   }
-  // },
+  onRowClick(item) {
+    this.$router.push({ name: "User", params: { id: item.id } });
+  },
+
+  async onPage(page) {
+    history.pushState({}, null, this.$route.path + "?page=" + page);
+    // await this.loadData(page);
+  },
+
+  setOrderColumn(column) {
+    this.orderColumn = column;
+  },
+
+  setOrderDirection(dir) {
+    this.orderDesc = dir;
+  },
 };
 </script>
 
