@@ -44,7 +44,35 @@ export default {
     },
     clearDate(columnKey) {
       this.$emit("dateFilterCleared", columnKey);
-    },
-  },
+    }
+  }
 };
 </script>
+
+<style lang="scss">
+.v-input__control {
+  border: 2px solid #7c7e8f !important;
+}
+
+.filter-td {
+  border: 0 !important;
+}
+
+@media screen and (max-width: 1200px) {
+  .filter-td {
+    height: 30px !important;
+
+    .v-input__control {
+      min-height: unset !important;
+    }
+
+    .v-input__slot {
+      padding-left: 5px !important;
+      padding-right: 5px !important;
+    }
+  }
+  .v-label {
+    font-size: 14px !important;
+  }
+}
+</style>
