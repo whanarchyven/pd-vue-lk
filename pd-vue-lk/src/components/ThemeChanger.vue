@@ -102,4 +102,42 @@ export default {
     background-color: #f0f0f0;
   }
 }
+@media screen and (max-width: 1200px) {
+  .theme-changer {
+    right: 63px;
+    width: 63px;
+    height: 32px;
+  }
+  .theme-changer__text {
+    display: none;
+  }
+  .theme-changer__circle {
+    width: 29px;
+    height: 28px;
+    margin-top: -14px;
+    left: 3px;
+    &.light {
+      right: 3px;
+    }
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+@media screen and (max-width: 500px) {
+  .theme-changer {
+    right: 20px;
+    top: 20px;
+    width: 34px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .theme-changer__circle {
+    position: static;
+    margin-top: unset;
+  }
+}
 </style>

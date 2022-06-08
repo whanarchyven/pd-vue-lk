@@ -26,6 +26,11 @@
   }
 }
 
+.container {
+  max-width: unset !important;
+  width: 100% !important;
+}
+
 .v-btn {
   border: 1px solid #7c7e8f;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.26);
@@ -39,7 +44,7 @@
     color: rgba(255, 37, 37, 0.74) !important;
   }
   .v-btn__content {
-    opacity: 1!important;
+    opacity: 1 !important;
   }
 }
 
@@ -59,6 +64,12 @@ nav {
   .container {
     max-width: unset !important;
     width: 95% !important;
+  }
+}
+@media screen and (max-width: 500px) {
+  .container {
+    width: 100% !important;
+    padding: 0!important;
   }
 }
 </style>
