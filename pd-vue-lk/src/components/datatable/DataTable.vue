@@ -1,8 +1,7 @@
 <template>
-  <div>
+  <v-theme-provider root>
     <v-data-table
       v-if="loading && headers && columns"
-      dark
       class="data-table"
       :headers="headers"
       loading
@@ -33,7 +32,6 @@
 
     <v-data-table
       v-if="!loading && headers"
-      dark
       class="data-table"
       :headers="headers"
       :items="items"
@@ -102,7 +100,7 @@
         ></v-pagination>
       </template>
     </v-data-table>
-  </div>
+  </v-theme-provider>
 </template>
 
 <script>
@@ -185,11 +183,40 @@ export default {
     },
   },
 };
+
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .data-table-link {
-  color: white;
+  color: var(--v-primary-base) !important;
   text-decoration: none;
+}
+
+.v-data-table-header {
+  th {
+    border-bottom: 0 !important;
+  }
+}
+
+.v-data-table__wrapper {
+  tr:last-child {
+    td {
+      border-bottom: thin solid hsla(0, 0%, 100%, 0.12) !important;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .v-data-table-header {
+    th {
+      padding: 0 5px !important;
+      white-space: nowrap;
+    }
+  }
+  .data-table-link {
+    span {
+      font-size: 14px !important;
+    }
+  }
 }
 </style>

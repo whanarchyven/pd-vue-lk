@@ -249,4 +249,9 @@ export default {
 .users {
   padding: 0 30px 30px 30px;
 }
+@media screen and (max-width: 1200px) {
+  .users {
+    padding: 0;
+  }
+}
 </style>
