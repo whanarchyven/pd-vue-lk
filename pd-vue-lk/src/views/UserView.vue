@@ -96,16 +96,16 @@
       </div>
     </div>
 
-    <v-dialog v-model="deleteDialog" max-width="290" dark>
+    <v-dialog v-model="deleteDialog" max-width="290">
       <v-card>
         <v-card-title class="text-h5">Подтверждение</v-card-title>
         <v-card-text>Вы уверены, что хотите удалить пользователя?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" text @click="deleteDialog = false"
-            >Отмена
+          <v-btn text @click="deleteDialog = false">
+            Отмена
           </v-btn>
-          <v-btn color="green darken-1" text @click="deleteItem">Удалить</v-btn>
+          <v-btn class="button-danger" text @click="deleteItem">Удалить</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -281,13 +281,13 @@ export default {
 
 <style scoped lang="scss">
 .content {
-  width: 100%;
   padding-left: 12px;
   padding-top: 12px;
   padding-right: 44px;
   border-radius: 6px;
   margin-left: 15px;
   margin-right: 26px;
+  background-color: #272936;
 }
 
 .user-info {
@@ -309,6 +309,7 @@ export default {
 .user-info-email {
   text-align: left;
   margin-bottom: 44px;
+  color: #7c7e8f;
 }
 
 .user-actions {
@@ -319,6 +320,13 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+
+.user-action-button {
+  width: 142px;
+  &:first-child {
+    margin-bottom: 6px;
+  }
 }
 
 .user-row {
@@ -342,6 +350,7 @@ export default {
   align-items: center;
   margin-bottom: 19px;
 }
+
 .user-info-books-column-title {
   font-weight: 400;
   font-size: 22px;
@@ -354,6 +363,7 @@ export default {
   font-weight: 400;
   font-size: 18px;
   line-height: 30px;
+  color: #7c7e8f;
 }
 
 .user-info-books-column-list {
@@ -361,6 +371,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   list-style: none;
+
   li {
     font-weight: 400;
     font-size: 18px;
@@ -400,5 +411,18 @@ export default {
   background: #b7e2f4;
   border-radius: 4px;
   margin-bottom: 10px;
+}
+
+.theme--light {
+  .content {
+    background-color: white;
+  }
+
+  .user-info-name,
+  .user-info-books-column-title,
+  .user-info-books-column-list li,
+  .user-row-title {
+    color: #202020;
+  }
 }
 </style>

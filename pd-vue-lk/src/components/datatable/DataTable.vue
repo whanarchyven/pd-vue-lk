@@ -88,17 +88,17 @@
         </tr>
       </template>
 
-      <template v-slot:footer>
-        <v-pagination
-          class="data-table-pagination"
-          v-model="pagination.current_page"
-          :length="pagination.last_page"
-          :total-visible="7"
-          prev-icon="mdi-menu-left"
-          next-icon="mdi-menu-right"
-          @input="paginationInput"
-        ></v-pagination>
-      </template>
+<!--      <template v-slot:footer>-->
+<!--        <v-pagination-->
+<!--          class="data-table-pagination"-->
+<!--          v-model="pagination.current_page"-->
+<!--          :length="pagination.last_page"-->
+<!--          :total-visible="7"-->
+<!--          prev-icon="mdi-menu-left"-->
+<!--          next-icon="mdi-menu-right"-->
+<!--          @input="paginationInput"-->
+<!--        ></v-pagination>-->
+<!--      </template>-->
     </v-data-table>
   </v-theme-provider>
 </template>
@@ -183,7 +183,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style lang="scss">

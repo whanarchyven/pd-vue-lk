@@ -1,11 +1,11 @@
 <template>
-    <v-app id="app">
-      <menu-side-bar></menu-side-bar>
-      <div class="container">
-        <router-view />
-      </div>
-      <theme-changer />
-    </v-app>
+  <v-app id="app">
+    <menu-side-bar></menu-side-bar>
+    <div class="container">
+      <router-view />
+    </div>
+    <theme-changer />
+  </v-app>
 </template>
 
 <style lang="scss">
@@ -17,12 +17,29 @@
   color: #2c3e50;
   background-color: #1b1d2c;
   &.theme--light {
-    color: #7C7E8F;
-    background-color: #EFF3F9;
+    color: #7c7e8f;
+    background-color: #eff3f9;
   }
   .v-application--wrap {
     display: flex;
     flex-direction: row;
+  }
+}
+
+.v-btn {
+  border: 1px solid #7c7e8f;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.26);
+  border-radius: 3px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #7c7e8f;
+
+  &.button-danger {
+    color: rgba(255, 37, 37, 0.74) !important;
+  }
+  .v-btn__content {
+    opacity: 1!important;
   }
 }
 
