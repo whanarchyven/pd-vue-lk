@@ -240,7 +240,8 @@ export default {
 
 <style scoped lang="scss">
 .menu-sidebar {
-  width: 20vw;
+  width: 308px;
+  min-width: 308px;
   background: #272936;
   height: 100vh;
   padding-top: 27px;
@@ -333,6 +334,7 @@ a {
 @media screen and (max-width: 1200px) {
   .menu-sidebar {
     width: 52px;
+    min-width: 52px;
     padding-top: 110px;
   }
   .menu-sidebar-link {
@@ -347,6 +349,9 @@ a {
   }
   .menu-sidebar-title {
     display: none;
+  }
+  .menu-sidebar {
+    height: 100%;
   }
 }
 </style>

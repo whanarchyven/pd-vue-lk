@@ -7,7 +7,7 @@
     <div class="content">
       <div class="user-row">
         <div class="user-img">
-          <img src="@/assets/logo.png" alt="" />
+          <img src="@/assets/photo.jpg" alt="" />
         </div>
         <div class="user-info">
           <h1 class="user-info-name">{{ user.name }}</h1>
@@ -79,8 +79,6 @@
             </v-btn>
           </div>
         </div>
-      </div>
-      <div class="user-row">
         <div class="user-favourite-wrap">
           <h2 class="user-row-title">Предпочтения жанров</h2>
           <div class="user-favourite">
@@ -94,6 +92,20 @@
           </div>
         </div>
       </div>
+<!--      <div class="user-row">-->
+<!--        <div class="user-favourite-wrap">-->
+<!--          <h2 class="user-row-title">Предпочтения жанров</h2>-->
+<!--          <div class="user-favourite">-->
+<!--            <div-->
+<!--              v-for="(item, index) in favourite"-->
+<!--              v-bind:key="index"-->
+<!--              class="user-favourite-label"-->
+<!--            >-->
+<!--              {{ item }}-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
 
     <v-dialog v-model="deleteDialog" max-width="290">
@@ -102,9 +114,7 @@
         <v-card-text>Вы уверены, что хотите удалить пользователя?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="deleteDialog = false">
-            Отмена
-          </v-btn>
+          <v-btn text @click="deleteDialog = false"> Отмена </v-btn>
           <v-btn class="button-danger" text @click="deleteItem">Удалить</v-btn>
         </v-card-actions>
       </v-card>
@@ -280,6 +290,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.user-img {
+  img {
+    width: 337px;
+    height: 451px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+}
+
 .content {
   padding-left: 12px;
   padding-top: 12px;
@@ -295,6 +314,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   margin-left: 21px;
+  width: 60%;
 }
 
 .user-info-name {
@@ -324,6 +344,7 @@ export default {
 
 .user-action-button {
   width: 142px;
+
   &:first-child {
     margin-bottom: 6px;
   }
@@ -332,6 +353,7 @@ export default {
 .user-row {
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .user-info-books {
@@ -357,6 +379,7 @@ export default {
   line-height: 26px;
   color: #f4f4f4;
   margin-right: 14px;
+  white-space: nowrap;
 }
 
 .user-info-books-column-count {
@@ -423,6 +446,149 @@ export default {
   .user-info-books-column-list li,
   .user-row-title {
     color: #202020;
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  .content {
+    position: relative;
+    padding-bottom: 20px;
+  }
+  .user-img {
+    order: 1;
+    img {
+      width: 133px;
+      height: 177px;
+    }
+  }
+  .user-actions {
+    order: 3;
+  }
+  .user-info {
+    order: 4;
+    margin-left: 0;
+    width: 100%;
+  }
+  .user-info-name {
+    font-size: 25px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .user-info-name {
+    position: absolute;
+    top: 10px;
+    left: 166px;
+  }
+  .user-info-email {
+    position: absolute;
+    top: 40px;
+    left: 166px;
+  }
+  .user-favourite-wrap {
+    position: absolute;
+    top: 66px;
+    left: 166px;
+  }
+  .user-favourite-label {
+    margin-bottom: 5px;
+  }
+  .user-row-title {
+    font-size: 18px;
+  }
+  .user-info-books {
+    padding-top: 20px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .content {
+    padding: 17px;
+  }
+  .user-info-books {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 37px 65px;
+  }
+  .user-info-books-column {
+    margin-right: 0;
+  }
+  .user-info-books-column-title {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  .user-info-books-column-count {
+    font-size: 16px;
+  }
+  .user-info-books-column-list {
+    padding-left: 0;
+    li {
+      font-size: 16px;
+    }
+  }
+  .user-info-books-column-top {
+    margin-bottom: 0;
+  }
+  .user-action-button {
+    width: fit-content;
+    height: 37px !important;
+  }
+}
+@media screen and (max-width: 700px) {
+  .user-info-books {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 27px;
+  }
+}
+@media screen and (max-width: 620px) {
+  .content {
+    padding: 8px;
+  }
+  .user-actions-buttons {
+    position: absolute;
+    top: 12px;
+    left: 8px;
+    right: 8px;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+  .user-action-button {
+    &:first-child {
+      margin-bottom: 0;
+    }
+  }
+  .user-row {
+    padding-top: 50px;
+  }
+  .user-info-name {
+    top: 50px;
+    left: 130px;
+    font-size: 18px;
+  }
+  .user-info-email {
+    top: 80px;
+    left: 130px;
+    font-size: 14px;
+  }
+  .user-favourite-wrap {
+    top: 80px;
+    left: 130px;
+  }
+  .user-row-title {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
+  .user-img {
+    img {
+      width: 113px;
+      height: 144px;
+    }
+  }
+  .user-info-books {
+    padding-top: 10px;
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 </style>

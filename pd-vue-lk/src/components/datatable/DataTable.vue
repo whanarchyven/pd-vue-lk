@@ -88,17 +88,17 @@
         </tr>
       </template>
 
-<!--      <template v-slot:footer>-->
-<!--        <v-pagination-->
-<!--          class="data-table-pagination"-->
-<!--          v-model="pagination.current_page"-->
-<!--          :length="pagination.last_page"-->
-<!--          :total-visible="7"-->
-<!--          prev-icon="mdi-menu-left"-->
-<!--          next-icon="mdi-menu-right"-->
-<!--          @input="paginationInput"-->
-<!--        ></v-pagination>-->
-<!--      </template>-->
+      <!--      <template v-slot:footer>-->
+      <!--        <v-pagination-->
+      <!--          class="data-table-pagination"-->
+      <!--          v-model="pagination.current_page"-->
+      <!--          :length="pagination.last_page"-->
+      <!--          :total-visible="7"-->
+      <!--          prev-icon="mdi-menu-left"-->
+      <!--          next-icon="mdi-menu-right"-->
+      <!--          @input="paginationInput"-->
+      <!--        ></v-pagination>-->
+      <!--      </template>-->
     </v-data-table>
   </v-theme-provider>
 </template>
@@ -120,14 +120,14 @@ export default {
     dates: [],
     sort: {
       column: null,
-      dir: null,
-    },
+      dir: null
+    }
   }),
   mounted() {
     const dates = [];
     const headers = [];
 
-    this.columns.forEach(function (column, key) {
+    this.columns.forEach(function(column, key) {
       if (column.filter.type === "date") {
         dates[key] = [];
       }
@@ -135,7 +135,7 @@ export default {
       headers.push({
         text: column.data,
         value: column.name,
-        sortable: column.orderable,
+        sortable: column.orderable
       });
     });
 
@@ -180,12 +180,19 @@ export default {
 
     sortDesc(dir) {
       this.$emit("orderDir", dir);
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style lang="scss">
+.v-data-table {
+  background-color: #272936 !important;
+  border-radius: 20px !important;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
 .data-table-link {
   color: var(--v-primary-base) !important;
   text-decoration: none;
@@ -194,6 +201,10 @@ export default {
 .v-data-table-header {
   th {
     border-bottom: 0 !important;
+    color: white !important;
+    font-weight: 400 !important;
+    font-size: 15px !important;
+    line-height: 18px !important;
   }
 }
 
@@ -205,11 +216,25 @@ export default {
   }
 }
 
+.theme--light {
+  .v-data-table {
+    background-color: white !important;
+  }
+
+  .v-data-table-header {
+    th {
+      color: black !important;
+    }
+  }
+}
+
 @media screen and (max-width: 1200px) {
   .v-data-table-header {
     th {
       padding: 0 5px !important;
       white-space: nowrap;
+      font-size: 14px !important;
+      line-height: 16px !important;
     }
   }
   .data-table-link {
