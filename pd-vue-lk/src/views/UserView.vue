@@ -10,8 +10,8 @@
           <img src="@/assets/photo.jpg" alt="" />
         </div>
         <div class="user-info">
-          <h1 class="user-info-name">{{ user.name }}</h1>
-          <span class="user-info-email">{{ user.email }}</span>
+          <h1 class="user-info-name">{{ users[0].name }}</h1>
+          <span class="user-info-email">{{ users[0].mail }}</span>
           <div class="user-info-books">
             <div class="user-info-books-column">
               <div class="user-info-books-column-top">
@@ -22,7 +22,7 @@
               </div>
               <ul class="user-info-books-column-list">
                 <li v-for="(item, index) in books.readied" v-bind:key="index">
-                  {{ index + 1 }}. {{ item }}
+                  {{ index + 1 }}. {{ item.title }}
                 </li>
               </ul>
             </div>
@@ -35,7 +35,7 @@
               </div>
               <ul class="user-info-books-column-list">
                 <li v-for="(item, index) in books.wished" v-bind:key="index">
-                  {{ index + 1 }}. {{ item }}
+                  {{ index + 1 }}. {{ item.title }}
                 </li>
               </ul>
             </div>
@@ -51,7 +51,7 @@
                   v-for="(item, index) in books.recommended"
                   v-bind:key="index"
                 >
-                  {{ index + 1 }}. {{ item }}
+                  {{ index + 1 }}. {{ item.title }}
                 </li>
               </ul>
             </div>
@@ -83,29 +83,29 @@
           <h2 class="user-row-title">Предпочтения жанров</h2>
           <div class="user-favourite">
             <div
-              v-for="(item, index) in favourite"
+              v-for="(item, index) in genres"
               v-bind:key="index"
               class="user-favourite-label"
             >
-              {{ item }}
+              {{ item.name }}
             </div>
           </div>
         </div>
       </div>
-<!--      <div class="user-row">-->
-<!--        <div class="user-favourite-wrap">-->
-<!--          <h2 class="user-row-title">Предпочтения жанров</h2>-->
-<!--          <div class="user-favourite">-->
-<!--            <div-->
-<!--              v-for="(item, index) in favourite"-->
-<!--              v-bind:key="index"-->
-<!--              class="user-favourite-label"-->
-<!--            >-->
-<!--              {{ item }}-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--      <div class="user-row">-->
+      <!--        <div class="user-favourite-wrap">-->
+      <!--          <h2 class="user-row-title">Предпочтения жанров</h2>-->
+      <!--          <div class="user-favourite">-->
+      <!--            <div-->
+      <!--              v-for="(item, index) in favourite"-->
+      <!--              v-bind:key="index"-->
+      <!--              class="user-favourite-label"-->
+      <!--            >-->
+      <!--              {{ item }}-->
+      <!--            </div>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
     </div>
 
     <v-dialog v-model="deleteDialog" max-width="290">
@@ -125,7 +125,7 @@
 <script>
 import BreadCrumbsLine from "@/components/BreadCrumbsLine";
 // import LineChart from "@/views/components/charts/LineChart";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: { BreadCrumbsLine },
@@ -135,57 +135,60 @@ export default {
     saveLoader: false,
     deleteDialog: false,
     frequencyDialog: false,
-    user: {
-      name: "Алена Петрова",
-      email: "petrova3674@mail.ru",
-    },
-    books: {
-      readied: [
-        "Война и мир",
-        "Горе от ума",
-        "Убить пересмешника",
-        "Двенадцать стульев",
-        "Искра жизни",
-      ],
-      wished: [
-        "Отверженные",
-        "На западном фронте...",
-        "Мартин Иден",
-        "Три товарища",
-        "Время жить и время...",
-      ],
-      recommended: [
-        "Отверженные",
-        "На западном фронте...",
-        "Мартин Иден",
-        "Три товарища",
-        "Время жить и время...",
-      ],
-    },
-    favourite: ["классическая проза", "русская классика"],
+    // user: {
+    //   name: "Алена Петрова",
+    //   email: "petrova3674@mail.ru",
+    // },
+    // books: {
+    //   readied: [
+    //     "Война и мир",
+    //     "Горе от ума",
+    //     "Убить пересмешника",
+    //     "Двенадцать стульев",
+    //     "Искра жизни",
+    //   ],
+    //   wished: [
+    //     "Отверженные",
+    //     "На западном фронте...",
+    //     "Мартин Иден",
+    //     "Три товарища",
+    //     "Время жить и время...",
+    //   ],
+    //   recommended: [
+    //     "Отверженные",
+    //     "На западном фронте...",
+    //     "Мартин Иден",
+    //     "Три товарища",
+    //     "Время жить и время...",
+    //   ],
+    // },
+    // favourite: ["классическая проза", "русская классика"],
     description: null,
     editedUser: null,
     customBreadCrumb: null,
   }),
   async created() {
-    //   const id = this.$route.params.id;
-    //
-    //   await Promise.all([this.getBook(id), this.loadGenres()]).then(
-    //     ([book, genres]) => {
-    //       this.book = book;
-    //       this.genres.all = genres.data;
-    //     }
-    //   );
-    //
-    //   document.title = this.book.title + " - WhatToRead";
-    //
-    //   if (this.book.description) {
-    //     this.description = this.book.description.replace(/\n/g, "<br />");
-    //   } else {
-    //     this.description = "";
+    // const id = this.$route.params.id;
+    await this.getBooks();
+    await this.getGenres();
+    await this.getUsers();
+
+    // await Promise.all([this.loadBooks(), this.loadGenres()]).then(
+    //   ([book, genres]) => {
+    //     this.book = book;
+    //     this.genres.all = genres.data;
     //   }
-    //   this.setEditedBook(this.book);
-    //
+    // );
+
+    // document.title = this.book.title + " - WhatToRead";
+
+    // if (this.book.description) {
+    //   this.description = this.book.description.replace(/\n/g, "<br />");
+    // } else {
+    //   this.description = "";
+    // }
+    // this.setEditedBook(this.book);
+
     this.customBreadCrumb = {
       text: this.user.name,
       disabled: true,
@@ -202,15 +205,9 @@ export default {
     //
     //   this.loading = false;
   },
+  computed: mapGetters(["books", "genres", "users"]),
   methods: {
-    ...mapActions([
-      // "getBook",
-      // "loadGenres",
-      // "updateBook",
-      "deleteUser",
-      // "loadFileForFrequency",
-      // "showAlert",
-    ]),
+    ...mapActions(["getBooks", "getGenres", "getUsers"]),
     //
     // setEditedBook(book) {
     //   this.editedBook = {};

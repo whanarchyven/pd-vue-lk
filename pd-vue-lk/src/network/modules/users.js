@@ -1,7 +1,7 @@
 import base from "@/network/base";
 
 export default {
-  async getUserInfo(token) {
+  async getUsers(token) {
     return await base.execute("get", base.__prefix__, "user", {}, token);
   },
 };
