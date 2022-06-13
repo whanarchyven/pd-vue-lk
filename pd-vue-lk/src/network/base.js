@@ -1,10 +1,10 @@
 import axios from "axios";
 import qs from "qs";
 
+const URL = "http://01f1-95-29-161-222.ngrok.io/";
+
 export default {
-  __host__: process.env.VUE_APP_API_URL.endsWith("/")
-    ? process.env.VUE_APP_API_URL
-    : process.env.VUE_APP_API_URL + "/",
+  __host__: URL.endsWith("/") ? URL : URL + "/",
   __prefix__: "api/v1/",
   __adminPrefix__: "api/v1/admin/",
 
