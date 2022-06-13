@@ -23,7 +23,7 @@
 <script>
 import BreadCrumbsLine from "@/components/BreadCrumbsLine";
 import DataTable from "@/components/datatable/DataTable";
-import { mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 // import { debounce } from "lodash";
 // import BookDialog from "@/views/components/custom/BookDialog";
 
@@ -31,22 +31,22 @@ export default {
   components: { BreadCrumbsLine, DataTable },
   data: () => ({
     loading: false,
-    users: [
-      {
-        id: 1,
-        name: "test",
-        mail: "test@mail.ru",
-        readied: 12,
-        "registration-date": new Date(),
-      },
-      {
-        id: 2,
-        name: "test2",
-        mail: "test2@mail.ru",
-        readied: 4,
-        "registration-date": new Date(),
-      },
-    ],
+    // users: [
+    //   {
+    //     id: 1,
+    //     name: "test",
+    //     mail: "test@mail.ru",
+    //     readied: 12,
+    //     "registration-date": new Date(),
+    //   },
+    //   {
+    //     id: 2,
+    //     name: "test2",
+    //     mail: "test2@mail.ru",
+    //     readied: 4,
+    //     "registration-date": new Date(),
+    //   },
+    // ],
     newBookDialog: false,
     columns: [
       {
@@ -158,66 +158,54 @@ export default {
       next_page: 1,
     },
   }),
-  // mounted() {
-  //   this.initData();
-  // },
-  // watch: {
-  //   orderColumn() {
-  //     if (this.orderDesc) {
-  //       this.orderDesc = false;
-  //     }
-  //
-  //     this.loadData();
-  //   },
-  //   orderDesc() {
-  //     if (this.orderDesc) {
-  //       this.loadData();
-  //     }
-  //   },
-  // },
+  mounted() {
+    this.initData();
+  },
+  watch: {
+    orderColumn() {
+      if (this.orderDesc) {
+        this.orderDesc = false;
+      }
+
+      this.loadData();
+    },
+    orderDesc() {
+      if (this.orderDesc) {
+        this.loadData();
+      }
+    },
+  },
+  computed: mapGetters(["users"]),
   methods: {
-    //   ...mapActions(['loadBooks']),
-    //
-    //   async initData() {
-    //     this.loading = true;
-    //     const page = this.$route.query.page ?? 1;
-    //
-    //     await Promise.all([
-    //       this.loadBooks({page: page, order: [this.order], columns: this.columns}),
-    //     ]).then(([
-    //                books,
-    //              ]) => {
-    //       this.setTable(books);
-    //     })
-    //
-    //     this.loading = false;
-    //   },
-    //
-    //   async loadData(page = 1) {
-    //     this.loading = true;
-    //
-    //     const books = await this.loadBooks({
-    //       page: page,
-    //       order: [{
-    //         column: this.orderColumn,
-    //         dir: this.orderDesc ? "desc" : "asc",
-    //       }],
-    //       columns: this.columns,
-    //     });
-    //     this.setTable(books);
-    //
-    //     this.loading = false;
-    //   },
-    //
-    //   setTable(books) {
-    //     this.pagination = books.pagination;
-    //     this.books = books.data;
-    //   },
-    //
-    //   onFilter: debounce(async function () {
-    //     await this.loadData();
-    //   }, 1000),
-    //
+    ...mapActions(["getUsers"]),
+
+    async initData() {
+      this.loading = true;
+      await this.getUsers();
+      // await Promise.all([this.getUsers()]).then(([users]) => {
+      //   // this.setTable(users);
+      // });
+
+      this.loading = false;
+    },
+
+    async loadData() {
+      this.loading = true;
+      await this.getUsers();
+      // const users = await this.getUsers();
+      // this.setTable(users);
+
+      this.loading = false;
+    },
+
+    // setTable(users) {
+    //   this.users = users.data;
+    // },
+
+    // onFilter: debounce(async function () {
+    //   await this.loadData();
+    // }, 1000),
+
     columnFilterUpdate(key, value) {
       const columns = this.columns;
       columns[key].search.value = value;

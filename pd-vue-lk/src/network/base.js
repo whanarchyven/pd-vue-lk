@@ -1,7 +1,7 @@
 import axios from "axios";
 import qs from "qs";
 
-const URL = "http://01f1-95-29-161-222.ngrok.io/";
+const URL = "http://997a-95-29-161-222.ngrok.io";
 
 export default {
   __host__: URL.endsWith("/") ? URL : URL + "/",
