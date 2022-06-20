@@ -29,6 +29,7 @@
 .container {
   max-width: unset !important;
   width: 100% !important;
+  padding: 0px !important;
 }
 
 .v-btn {
