@@ -37,37 +37,30 @@ ChartJS.register(
 )
 
 export default {
-  name: 'LineChart',
+  name: 'OhvatChart',
   components: {
     LineChartGenerator
   },
   props: {
     chartId: {
-      type: String,
       default: 'line-chart'
     },
     datasetIdKey: {
-      type: String,
       default: 'label'
     },
     width: {
-      type: Number,
       default: 400
     },
     height: {
-      type: String,
       default: 400
     },
     cssClasses: {
       default: '',
-      type: String
     },
     styles: {
-      type: Object,
       default: () => {}
     },
     plugins: {
-      type: Array,
       default: () => []
     }
   },
@@ -75,15 +68,15 @@ export default {
     return {
       chartData: {
         labels: [
-          '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'
+          '31/01','01/02','02/02','03/02','04/02','05/02','06/02',
         ],
         datasets: [
           {
-            label: 'Количество обращений к боту',
-            lineTension:1,
-            backgroundColor: '#46AD4B',
-            borderColor:'#46AD4B',
-            data: [131,23,123,94,35,66,87,98,39,110,121,42,83,24,85,36,87,80,49,68,41,62,83,94,25,36,127,48,129,130]
+            label: 'Всего',
+            lineTension:0.5,
+            backgroundColor: '#7F7FD5',
+            borderColor:'#7F7FD5',
+            data: [300,324,333,290,256,340,300]
           },
         ]
       },

@@ -1,5 +1,5 @@
 <template>
-  <LineChartGenerator
+  <Bar
       :chart-options="chartOptions"
       :chart-data="chartData"
       :chart-id="chartId"
@@ -13,38 +13,29 @@
 </template>
 
 <script>
-import { Line as LineChartGenerator } from 'vue-chartjs/legacy'
+import { Bar } from 'vue-chartjs/legacy'
 
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
   Legend,
-  LineElement,
-  LinearScale,
+  BarElement,
   CategoryScale,
-  PointElement
+  LinearScale
 } from 'chart.js'
 
-ChartJS.register(
-    Title,
-    Tooltip,
-    Legend,
-    LineElement,
-    LinearScale,
-    CategoryScale,
-    PointElement
-)
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
-  name: 'LineChart',
+  name: 'BarChart',
   components: {
-    LineChartGenerator
+    Bar
   },
   props: {
     chartId: {
       type: String,
-      default: 'line-chart'
+      default: 'bar-chart'
     },
     datasetIdKey: {
       type: String,
@@ -55,7 +46,7 @@ export default {
       default: 400
     },
     height: {
-      type: String,
+      type: Number,
       default: 400
     },
     cssClasses: {
@@ -75,22 +66,31 @@ export default {
     return {
       chartData: {
         labels: [
-          '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'
+          '< 18',
+          '18-21',
+          '21-24',
+          '24-27',
+          '27-30',
+          '30-35',
+          '35-40',
+          '> 45',
         ],
         datasets: [
           {
-            label: 'Количество обращений к боту',
-            lineTension:1,
-            backgroundColor: '#46AD4B',
-            borderColor:'#46AD4B',
-            data: [131,23,123,94,35,66,87,98,39,110,121,42,83,24,85,36,87,80,49,68,41,62,83,94,25,36,127,48,129,130]
+            label: 'Женщины',
+            backgroundColor: '#E786D7',
+            data: [2, 2, 2, 37, 20, 3, 10, 2]
           },
+          {
+            label: 'Мужчины',
+            backgroundColor: '#7F7FD5',
+            data: [2, 20, 20, 20, 3, 3, 3, 8]
+          }
         ]
       },
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false,
-
+        maintainAspectRatio: false
       }
     }
   }

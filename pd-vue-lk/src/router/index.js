@@ -14,14 +14,9 @@ import UserView from "@/views/UserView";
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    name: "home",
-    component: HomeView,
-  },
 
   {
-    path: "/dashboard",
+    path: "/",
     name: "dashboard",
     component: DashboardView,
   },

@@ -7,6 +7,14 @@ export default {
     },
   ],
 
+  statistic: [
+    {
+      text: "Статистика",
+      disabled: true,
+      href: "/statistic",
+    },
+  ],
+
   users: [
     {
       text: "Пользователи",

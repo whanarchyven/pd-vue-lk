@@ -6,7 +6,7 @@
         class="menu-sidebar-link-block-active"
         v-if="currentTab == 'dashboard'"
       >
-        <router-link class="menu-sidebar-link" to="/dashboard">
+        <router-link class="menu-sidebar-link" to="/">
           <span>Мониторинг</span>
           <img
             src="../assets/sidebar/monitoring-active.svg"
@@ -21,7 +21,7 @@
         v-else
         @click="changeCurrentTab('dashboard')"
       >
-        <router-link class="menu-sidebar-link" to="/dashboard">
+        <router-link class="menu-sidebar-link" to="/">
           <span>Мониторинг</span>
           <img src="../assets/sidebar/monitoring.svg" alt="Icon" />
         </router-link>

@@ -1,5 +1,5 @@
 <template>
-  <LineChartGenerator
+  <Pie
       :chart-options="chartOptions"
       :chart-data="chartData"
       :chart-id="chartId"
@@ -13,38 +13,28 @@
 </template>
 
 <script>
-import { Line as LineChartGenerator } from 'vue-chartjs/legacy'
+import { Pie } from 'vue-chartjs/legacy'
 
 import {
   Chart as ChartJS,
   Title,
   Tooltip,
   Legend,
-  LineElement,
-  LinearScale,
-  CategoryScale,
-  PointElement
+  ArcElement,
+  CategoryScale
 } from 'chart.js'
 
-ChartJS.register(
-    Title,
-    Tooltip,
-    Legend,
-    LineElement,
-    LinearScale,
-    CategoryScale,
-    PointElement
-)
+ChartJS.register(Title, Tooltip, Legend, ArcElement, CategoryScale)
 
 export default {
-  name: 'LineChart',
+  name: 'PieChart',
   components: {
-    LineChartGenerator
+    Pie
   },
   props: {
     chartId: {
       type: String,
-      default: 'line-chart'
+      default: 'pie-chart'
     },
     datasetIdKey: {
       type: String,
@@ -55,7 +45,7 @@ export default {
       default: 400
     },
     height: {
-      type: String,
+      type: Number,
       default: 400
     },
     cssClasses: {
@@ -74,23 +64,17 @@ export default {
   data() {
     return {
       chartData: {
-        labels: [
-          '1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30'
-        ],
+        labels: ['Мобильные','Компьютер'],
         datasets: [
           {
-            label: 'Количество обращений к боту',
-            lineTension:1,
-            backgroundColor: '#46AD4B',
-            borderColor:'#46AD4B',
-            data: [131,23,123,94,35,66,87,98,39,110,121,42,83,24,85,36,87,80,49,68,41,62,83,94,25,36,127,48,129,130]
-          },
+            backgroundColor: ['#7F7FD5', '#E786D7'],
+            data: [86, 14]
+          }
         ]
       },
       chartOptions: {
         responsive: true,
-        maintainAspectRatio: false,
-
+        maintainAspectRatio: false
       }
     }
   }
